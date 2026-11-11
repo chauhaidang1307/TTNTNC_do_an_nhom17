@@ -1,0 +1,24 @@
+states:
+	Initiate:
+	grid 6x7: 7 cột 6 hàng, mỗi ô gồm: quân trống/quân người 1/ quân người 2
+	to_move: lượt của người chơi 1 hoặc 2
+	moves_made: số nước đã đi (Giúp cho việc phát hiện hòa)
+	winner: chưa có/ người 1/ người 2 
+	Valid_moves:
+	trả về các cột còn chưa đầy để thả quân tiếp theo.
+	Moves:
+	chỉ thả quân trong các cột chưa đầy và sẽ bị trọng lực kéo xuống hàng 
+	thấp nhất của cột đó, nếu chưa có người chiến thắng, đổi bên.
+	Nếu gặp điểm không hợp lệ sẽ báo lỗi.
+	Winner:
+	Xét quanh quân vừa đặt xem số quân liên tiếp theo cột, dòng, chéo của người chơi x đã đạt >= 4 hay chưa, 
+	nếu chưa thì tiếp tục
+	rồi thì cho người x thắng. Nếu đã đi hết 42 nước mà không có winner thì hòa.
+	
+	Kết thúc và kết quả theo gốc nhìn:
+	nếu người 1 thắng thì trả về +1 góc nhìn người 2 là -1
+	nếu người 2 thắng thì trả về -1 góc nhìn người 1 là +1
+	nếu hòa trả về 0
+	
+	
+	
