@@ -1,0 +1,132 @@
+Bộ luật Rule-Based Heuristic cho Connect Four
+
+1. Quy ước và cơ chế quyết định
+Giả sử:
+- Bàn cờ có kích thước 6 hàng × 7 cột. Cột đánh số 0–6. grid[0] là hàng đáy.
+- Người chơi 1, người chơi 2, ô trống là 0.
+- "Tác tử" là người đang đến lượt (to_move), "đối thủ" là người còn lại. Tác tử có thể là người chơi 1 hoặc 2.
+- Quân cờ chỉ được đặt vào ô trống thấp nhất của mỗi cột.
+- Tác tử chỉ được chọn những cột còn chỗ trống (legal_actions).
+- Mỗi nước đi ứng viên được mô phỏng trước trên bản sao của bàn (clone), hoặc step rồi undo. Tác tử không sửa bàn của arena.
+
+Cơ chế quyết định:
+- Dùng ưu tiên cứng (strict priority): luật có số nhỏ hơn được xét trước, không dùng điểm số.
+- Luật 4 là bộ lọc an toàn: nó loại các nước nguy hiểm trước khi Luật 3, 5, 6 chọn nước.
+- Khi có nhiều cột cùng thỏa một luật: Luật 1 chọn cột có chỉ số nhỏ nhất; các luật còn lại chọn ngẫu nhiên theo seed của agent (random.Random(seed)) để kết quả tái lập được nhưng các ván không trùng nhau.
+
+Luật 1: Ưu tiên thắng ngay
+Priority 1
+Điều kiện kích hoạt:
+- Tồn tại ít nhất một cột mà nếu tác tử đặt quân vào đó, tác tử sẽ tạo thành 4 quân liên tiếp theo hàng ngang, hàng dọc hoặc đường chéo.
+Hành động:
+- Chọn cột giúp chiến thắng ngay lập tức.
+- Nếu có nhiều cột cùng thắng, chọn cột có chỉ số nhỏ nhất để đảm bảo kết quả có thể tái lập.
+Ví dụ: Người chơi có 3 quân liên tiếp và có thể hoàn thành 4 quân bằng một nước đi hợp lệ.
+win_Imediately = [0,0,1,1,2,2]
+(Đã kiểm tra bằng engine: sau chuỗi này đến lượt người 1, và cột 3 là nước thắng ngay duy nhất.)
+
+Luật 2: Chặn đối thủ thắng ngay
+Priority 2
+Điều kiện kích hoạt:
+- Không có nước thắng ngay (Luật 1 không kích hoạt).
+- Mô phỏng tất cả các nước đi hợp lệ của đối thủ (như thể đến lượt đối thủ).
+- Nếu đối thủ có thể tạo thành 4 quân liên tiếp ngay ở lượt tiếp theo, xác định cột tương ứng.
+Hành động:
+- Nếu đối thủ có đúng một cột thắng ngay: đặt quân vào cột đó.
+- Nếu đối thủ có hai cột thắng ngay trở lên: xem Xung đột 4.
+Ví dụ: Đối thủ có 3 quân ngang liên tiếp và ô thứ tư có thể được đặt quân ngay. Tác tử phải chặn vị trí đó.
+Block_Win = [0,0,1,1,2,2,1]
+(Đã kiểm tra bằng engine: sau chuỗi này đến lượt người 2, người 1 sẽ thắng ngay ở cột 3, nên người 2 phải đặt vào cột 3.)
+
+Luật 3: Nhận diện mối đe dọa tiềm tàng
+Priority 3
+Điều kiện kích hoạt:
+Xét tất cả các cửa sổ gồm 4 ô liên tiếp theo 4 hướng:
+- Ngang.
+- Dọc.
+- Chéo lên.
+- Chéo xuống.
+Một cửa sổ là mối đe dọa tiềm tàng của đối thủ khi:
+- Có 3 quân của đối thủ và 1 ô trống, và ô trống đó CHƯA chơi được vì ô bên dưới nó còn trống.
+Phân biệt:
+Loại mối đe dọa	Điều kiện	Xử lý
+Immediate threat	Ô trống chơi được ngay (3 quân + 1 ô trống chơi được)	Đã thuộc Luật 2
+Potential threat	Ô trống chưa chơi được vì còn ô trống bên dưới	Thuộc Luật 3
+Hành động:
+- Ghi nhận ô trống đó là "ô thắng tiềm tàng" của đối thủ.
+- Tác tử không thể đặt quân lên ô chưa chơi được, nên không "chặn" trực tiếp. Điều tác tử làm được là không đặt quân vào ô ngay dưới nó (Luật 4 sẽ loại nước đó), và chiếm ô đó nếu nó trở thành chơi được ở lượt của mình (khi đó thuộc Luật 2).
+- Mối đe dọa 2 quân + 2 ô trống KHÔNG dùng làm luật bắt buộc, vì số cửa sổ như vậy rất nhiều trong thế cờ bình thường. Việc tạo chuỗi 2–3 quân được xử lý ở Luật 5.
+Ví dụ: Đối thủ có 3 quân theo đường chéo, nhưng ô thứ tư chưa thể đặt quân vì ô bên dưới còn trống. Đây là mối đe dọa tiềm tàng, không phải nước thắng ngay.
+[CẦN QUYẾT ĐỊNH] Luật 3 hiện không tự chọn nước đi, nó chỉ cung cấp thông tin cho Luật 4. Có thể gộp Luật 3 vào Luật 4, hoặc giữ riêng để so sánh bật/tắt trong ablation. Chưa có kết quả thực nghiệm nào cho việc này.
+
+Luật 4: Bộ lọc an toàn - Tránh tạo cơ hội thắng cho đối thủ
+Priority 4 (áp dụng trước Luật 3, 5, 6 khi chọn nước)
+Điều kiện kích hoạt:
+- Sau khi mô phỏng một nước đi của tác tử, đối thủ có thể đặt quân vào một vị trí mới và thắng ngay.
+- Ví dụ, tác tử đặt quân vào một cột khiến ô phía trên trở thành vị trí thắng hợp lệ cho đối thủ.
+Hành động:
+- Loại bỏ nước đi khiến đối thủ có cơ hội thắng ngay ở lượt tiếp theo.
+- Các luật 3, 5, 6 chỉ chọn trong những nước còn lại.
+- Nếu tất cả nước đi đều tạo ra nguy cơ, chọn nước đi khiến đối thủ có ít cột thắng nhất; nếu bằng nhau, chọn ngẫu nhiên theo seed.
+Ví dụ: Tác tử đặt quân vào một ô, vô tình giúp đối thủ hoàn thành 4 quân theo chiều dọc ở lượt kế tiếp.
+
+Luật 5: Create Winning Opportunities - Tạo cơ hội tấn công
+Priority 5
+Điều kiện kích hoạt:
+- Không có nước thắng ngay.
+- Không có mối đe dọa bắt buộc phải chặn.
+- Trong các nước an toàn (qua bộ lọc Luật 4), có nước giúp tác tử tạo thành các chuỗi 2 hoặc 3 quân có khả năng phát triển thành 4 quân.
+Hành động:
+- Ưu tiên tạo chuỗi 3 quân có ô trống tiếp theo có thể chơi được.
+- Ưu tiên tạo nhiều hướng tấn công cùng lúc.
+- Tránh tạo chuỗi mà vị trí hoàn thành không thể tiếp cận do trọng lực.
+Ví dụ: Tác tử có 2 quân liên tiếp và có thể đặt quân thứ ba để tạo cơ hội thắng ở lượt sau.
+
+Luật 6: Strategic Positioning - Ưu tiên vị trí chiến lược
+Priority 6
+Điều kiện kích hoạt:
+- Không có nước đi nào kích hoạt các luật từ 1 đến 5 (xét trong các nước an toàn).
+Hành động:
+- Ưu tiên các cột ở giữa bàn cờ.
+- Ưu tiên cột trung tâm vì có nhiều khả năng tạo chuỗi ngang và chéo.
+- Thứ tự ưu tiên vị trí (cột đánh số 0–6): cột 3, rồi {2, 4}, rồi {1, 5}, rồi {0, 6}.
+- Trong mỗi cặp đối xứng ({2, 4}, {1, 5}, {0, 6}) chọn ngẫu nhiên theo seed.
+Ví dụ: Khi chưa có mối đe dọa hoặc cơ hội tấn công rõ ràng, tác tử chọn cột trung tâm.
+
+2. Thứ tự ưu tiên tổng thể
+Priority	Rule	Mục tiêu
+1	Win Immediately	Chiến thắng ngay
+2	Block Immediate Win	Ngăn đối thủ chiến thắng ngay
+3	Potential Threats	Nhận diện ô thắng tiềm tàng của đối thủ
+4	Safety Filter (Avoid Opponent Winning Opportunities)	Bộ lọc: không tạo cơ hội thắng cho đối thủ (áp dụng cho Luật 3, 5, 6)
+5	Create Winning Opportunities	Tạo cơ hội tấn công
+6	Strategic Positioning	Chọn vị trí chiến lược
+
+Lưu ý: Thứ tự này không có nghĩa là mọi luật đều được thực hiện độc lập. Tác tử cần mô phỏng các nước đi và đánh giá hậu quả trước khi quyết định.
+
+3. Xử lý xung đột giữa các luật
+Đây là phần quan trọng để chứng minh hệ thống Rule-Based có khả năng xử lý tình huống khi nhiều luật cùng được kích hoạt. Mọi xung đột dưới đây đều giải quyết bằng ưu tiên cứng (luật số nhỏ hơn thắng), không dùng điểm số.
+
+Xung đột 1: Tấn công và phòng thủ
+- Luật 1: Tác tử có thể chiến thắng ngay.
+- Luật 2: Đối thủ cũng có thể chiến thắng ngay.
+Giải quyết: Ưu tiên Luật 1 - Win Immediately. Tác tử thắng ngay thì ván kết thúc, không cần chặn đối thủ.
+
+Xung đột 2: Phòng thủ và tấn công
+- Luật 2 (hoặc bộ lọc Luật 4): có nước chặn đối thủ hoặc tránh tạo thế thắng cho đối thủ.
+- Luật 5: có nước tạo chuỗi 3 quân cho tác tử.
+Giải quyết: Phòng thủ trước. Nước thắng ngay của đối thủ (Luật 2) và bộ lọc an toàn (Luật 4) được xét trước cơ hội tấn công chưa chắc chắn (Luật 5). Luật 5 chỉ chọn trong các nước còn lại sau bộ lọc.
+
+Xung đột 3: Chọn vị trí chiến lược và tránh tạo cơ hội thắng
+- Luật 6: Cột trung tâm có điểm chiến lược cao.
+- Luật 4: Đặt quân tại cột trung tâm có thể mở ra cơ hội thắng ngay cho đối thủ.
+Giải quyết: Luật 4 được ưu tiên. Tác tử loại bỏ nước đi nguy hiểm, dù cột đó có điểm chiến lược cao.
+
+Xung đột 4: Đối thủ có hai nước thắng ngay
+- Luật 2: Chặn cột thắng thứ nhất.
+- Luật 2: Chặn cột thắng thứ hai.
+Giải quyết: Mỗi nước đi chỉ lấp được một ô, tức ô chơi được của đúng một cột. Vì hai cột thắng khác nhau, sau khi tác tử chặn một cột thì đối thủ vẫn thắng được ở cột còn lại. Vậy không có nước nào giảm được số cột thắng của đối thủ, trừ khi tác tử thắng ngay (Luật 1, đã xét trước). Khi tác tử không thể thắng ngay, thế cờ coi như thua nếu đối thủ đi đúng; tác tử chặn một trong hai cột (chọn ngẫu nhiên theo seed) và hy vọng đối thủ bỏ lỡ. Ghi rõ đây là hạn chế của Heuristic nhìn một nước phía trước, và Alpha-Beta cũng không cứu được thế này nếu đã có hai ô thắng.
+
+Hạn chế và giả thuyết cần kiểm chứng:
+- Heuristic chỉ nhìn tối đa 2 nước (nước của tác tử và phản hồi ngay của đối thủ), nên không phát hiện được các bẫy dài hơn.
+- Việc cột trung tâm tốt hơn và việc Luật 3, 5 có ích là giả thuyết, chưa có số liệu. Chỉ kết luận sau khi chạy ván thật (nhiều ván, chia đều đi trước và đi sau, nhiều seed).
