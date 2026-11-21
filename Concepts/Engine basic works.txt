@@ -1,0 +1,17 @@
+Làm sao để máy biết người vừa đi đã thắng theo hướng ngang trong Connect4?
+
+1.Ngay sau khi step đặt quân, ta cần biết ba thứ: hàng và cột của quân vừa đặt, 
+và người vừa đi. Người vừa đi phải xác định trước khi đổi to_move.
+
+2. Đếm bên trái: bắt đầu từ ô ngay bên trái quân vừa đặt, đếm số quân liên tiếp cùng màu.
+Dừng khi gặp một trong hai: (a) vượt khỏi mép bàn (cột nhỏ hơn 0), 
+hoặc (b) gặp ô không cùng màu (ô trống hoặc quân đối thủ).
+
+3. Đếm bên phải: làm tương tự, đi về phía cột lớn hơn. Mép phải là cột COLS - 1; 
+cột COLS đã nằm ngoài bàn. Hai phía đếm độc lập, đều xuất phát từ quân vừa đặt.
+
+4. Tổng = số quân bên trái + 1 (quân vừa đặt, chỉ tính một lần) + số quân bên phải. 
+Nếu tổng từ 4 trở lên thì thắng, vì một nước đi có thể nối hai nhóm, 
+ví dụ 111 _ 111 thì đặt vào giữa ra 7.
+
+5. Khi thắng, gán winner cho người vừa đi (đã xác định ở bước 1).

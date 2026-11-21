@@ -1,0 +1,51 @@
+Alpha Beta Pruning trong Connect Four
+
+Cắt tỉa Alpha-Beta là một kỹ thuật tối ưu từ thuật toán Minimax, được dùng trong các trò chơi đối kháng 2 người
+
+Alpha-Beta không thay đổi lựa chọn nước đi của Minimax, mà là giảm số lượng nhánh cần duyệt trong trò chơi nhưng vẫn đảm bảo tìm được nước đi tối ưu nhất như Minimax.
+
+1. Minimax
+Trong minimax, hai người chơi có mục tiêu đối lặp nhau:
+MAX(+1): người chơi muốn tối đa điểm số dẫn đến chiến thắng.
+MIN(-1): đối thủ muốn tối thiếu điểm số ngăn cho MAX chiến thắng.
+
+Thuật toán hoạt động bằng cách mô phỏng lại tất cả các nước đi có thể xảy ra. Sau đó, sử dụng 'Evaluation Function' để chấm điểm trạng thái bàn cờ.
+
+Ví dụ:
++1: MAX thắng
+-1: MAX thua
+ 0: Hòa
+các giá trị trung gian: Đánh giá lợi thế của một trạng thái cờ
+
+
+2. Alpha-Beta Pruning
+Minimax có số lượng trạng thái cần đánh giá tăng rất nhanh khi độ sâu tìm kiếm tăng lên.
+VD: với connect Four 7x6 có 7 cột và 6 dòng
+bước đầu có 7 bước chọn
+bước hai từ 7 bước chọn lại sinh ra thêm 7 bước là 7x7 = 49 nhánh 
+bước ba lại sinh thêm 7 bước từ bước hai, là 49x7 = 343 nhánh 
+
+vì vậy Alpha-Beta giải quyết vấn đề này bằng cách sử dụng hai giá trị giới hạn:
+với Alpha: Điểm số tốt nhất mà MAX có thể đảm bảo đạt được tại thời điểm hiện tại.
+     beta: Điểm số tốt nhất mà MIN có thể đảm bảo đạt được tại thời điểm hiện tại.
+
+Khi phát hiện một nhánh không thể tạo ra kết quả tốt hơn lựa chọn đã có, thuật toán sẽ cắt nhanh đó đi mà không cần tiếp tục mô phỏng.
+
+Điều kiện là Alpha >= Beta (Giúp giảm số lượng nhánh cần nhận xét, tiết kiệm thời gian tính toán mà không làm thay đổi kết quả tối ưu Minimax)
+
+3. Áp dụng vào Connect Four
+mỗi cột có chỗ trống được xem là một nước đi hợp lệ
+
+Quá trình hoạt động:
+1. Máy tính nhận trạng thái bàn cờ hiện tại.
+2. Sinh các nước đi hợp lệ và xây dựng cây trò chơi đến độ sâu giới hạn.
+3. Luân phiên giữa MAX và MIN để mô phỏng hai người chơi.
+4. Đánh giá các trạng thái cuối bằng điểm thắng, thua, hòa hoặc hàm đánh giá vị trí.
+5. Cập nhật Alpha và Beta trong quá trình duyệt cây.
+6. Khi điều kiện Alpha >= Beta xuất hiện, loại bỏ những nhánh còn lại không thể ảnh hưởng đến quyết định.
+7. Trả về nước đi có giá trị Minimax tốt nhất.
+
+4. Tài liệu tham khảo
+1. Russell, S. & Norvig, P. – Artificial Intelligence: A Modern Approach (AIMA). Phần Adversarial Search, mục Alpha-Beta Pruning.
+2. Knuth, D. E. & Moore, R. W. (1975). An Analysis of Alpha-Beta Pruning. Artificial Intelligence, 6(4), 293–326.
+3. Liu, M. – AlphaGo Simplified: Rule-Based AI and Deep Learning in Everyday Games. Chương 4: MiniMax Tree Search; Chương 6: Alpha-Beta Pruning; Chương 7: Position Evaluation in MiniMax
