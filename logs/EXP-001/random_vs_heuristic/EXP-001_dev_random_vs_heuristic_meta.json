@@ -1,0 +1,60 @@
+{
+ "exp": "EXP-001",
+ "split": "dev",
+ "games": 100,
+ "agent_a": "random",
+ "agent_b": "heuristic",
+ "seed_start": 0,
+ "second_seed_offset": 10000000,
+ "summary": {
+  "total": {
+   "games": 100,
+   "win": 0,
+   "draw": 0,
+   "loss": 100,
+   "score": 0.0,
+   "wilson_low": 0.0,
+   "wilson_high": 0.037
+  },
+  "a_first": {
+   "games": 50,
+   "win": 0,
+   "draw": 0,
+   "loss": 50,
+   "score": 0.0,
+   "wilson_low": 0.0,
+   "wilson_high": 0.0714
+  },
+  "a_second": {
+   "games": 50,
+   "win": 0,
+   "draw": 0,
+   "loss": 50,
+   "score": 0.0,
+   "wilson_low": 0.0,
+   "wilson_high": 0.0714
+  },
+  "mean_moves": 11.34
+ },
+ "timing": {
+  "Random": {
+   "moves": 542,
+   "mean_ms": 0.0013,
+   "p95_ms": 0.0026,
+   "mean_nodes": null,
+   "mean_depth": null
+  },
+  "Heuristic": {
+   "moves": 592,
+   "mean_ms": 0.295,
+   "p95_ms": 0.5258,
+   "mean_nodes": null,
+   "mean_depth": null
+  }
+ },
+ "git_commit": "0a9ca74",
+ "python": "3.14.6",
+ "machine": "Windows-11-10.0.26300-SP0",
+ "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+ "note": "Thời gian dao động theo máy và tải; tác tử theo thời gian (ab-t) không tái lập chính xác, xem cột depth trong file moves. RAM/VRAM chưa được đo. Điểm (score) theo góc nhìn của agent_a."
+}
