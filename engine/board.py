@@ -93,19 +93,3 @@ class Board:
     def render(self):
         for r in reversed(range(ROWS)):
             print(self.grid[r])
-
-
-if __name__ == "__main__":
-    b = Board()
-    steps = [0,0,1,1,2,2,0,3,4,3]
-    for s in steps:
-        b.step(s)
-        time.sleep(0.5)
-        os.system('cls')
-        b.render()
-    for i in range(2):
-        if b.result(i+1) == 1:
-            print(f"The winner is Player 1")
-        elif b.result(i+1) == -1:
-            print(f"The winner is Player 2")
-            break
