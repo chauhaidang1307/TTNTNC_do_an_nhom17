@@ -8,6 +8,9 @@ from pathlib import Path
 from engine.board import Board, PLAYER_1, PLAYER_2
 from agents.random_agent import RandomAgent
 from agents.heuristic import HeuristicAgent
+from agents.alphabeta import AlphaBetaAgent
+
+AGENT_KINDS = ["random", "heuristic", "alphabeta"]
 
 SYMBOLS = {0: ".", PLAYER_1: "X", PLAYER_2: "O"}
 # File lưu các seed muốn giữ lại, nằm ở logs/ của dự án (tính từ vị trí file này, không phụ thuộc nơi chạy)
@@ -25,6 +28,17 @@ def draw(board):
     print("0 1 2 3 4 5 6")
 
 
+def make_agent(kind, seed, depth=4, pruning=True, time_limit=None):
+    # Tạo agent theo tên loại. depth, pruning, time_limit chỉ dùng cho alphabeta.
+    if kind == "random":
+        return RandomAgent(seed=seed)
+    if kind == "heuristic":
+        return HeuristicAgent(seed=seed)
+    if kind == "alphabeta":
+        return AlphaBetaAgent(depth=depth, seed=seed, pruning=pruning, time_limit=time_limit)
+    raise ValueError(f"Loại agent không hợp lệ: {kind}")
+
+
 def play_game(agents, delay=0.5, clear=True):
     # agents: dict {PLAYER_1: agent, PLAYER_2: agent}. Trả về Board đã kết thúc.
     board = Board()
@@ -34,7 +48,7 @@ def play_game(agents, delay=0.5, clear=True):
         board.step(col)
         if clear:
             clear_screen()
-        print(f"Người {player} ({SYMBOLS[player]}) đi cột {col}  |  nước thứ {board.moves_made}")
+        print(f"{agents[player].name} ({SYMBOLS[player]}) đi cột {col}  |  nước thứ {board.moves_made}")
         draw(board)
         time.sleep(delay)
     return board
@@ -68,7 +82,12 @@ def save_seeds(seed1, seed2, agents, board):
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
-    parser = argparse.ArgumentParser(description="Demo máy-máy: Heuristic đấu với Random")
+    parser = argparse.ArgumentParser(description="Demo máy-máy: chọn loại agent cho mỗi bên")
+    parser.add_argument("--p1", choices=AGENT_KINDS, default="heuristic", help="agent đi trước (X)")
+    parser.add_argument("--p2", choices=AGENT_KINDS, default="random", help="agent đi sau (O)")
+    parser.add_argument("--depth", type=int, default=None, help="độ sâu alphabeta (mặc định 4; khi có --time là độ sâu tối đa, mặc định 42)")
+    parser.add_argument("--time", type=float, default=None, help="giới hạn giây mỗi nước cho alphabeta (iterative deepening)")
+    parser.add_argument("--no-pruning", action="store_true", help="alphabeta tắt cắt tỉa (minimax thuần)")
     parser.add_argument("--seed1", type=int, default=None, help = "seed bỏ trống sẽ chạy random")
     parser.add_argument("--seed2", type=int, default=None, help = "seed bỏ trống sẽ chạy random")
     parser.add_argument("--delay", type=float, default=0.5, help="giây nghỉ giữa các nước")
@@ -80,14 +99,20 @@ def main():
         args.seed2 = random.randrange(1_000_000)
 
 
-    agents = {PLAYER_1: HeuristicAgent(seed=args.seed1), PLAYER_2: RandomAgent(seed=args.seed2)}
+    pruning = not args.no_pruning
+    if args.depth is None:
+        args.depth = 4 if args.time is None else 42
+    agents = {
+        PLAYER_1: make_agent(args.p1, args.seed1, args.depth, pruning, args.time),
+        PLAYER_2: make_agent(args.p2, args.seed2, args.depth, pruning, args.time),
+    }
     board = play_game(agents, delay=args.delay, clear=not args.no_clear)
 
     if board.winner is None:
         print("Kết quả: HÒA")
     else:
-        print(f"Kết quả: người {board.winner} ({SYMBOLS[board.winner]}) THẮNG")
-    print(f"Seed: người 1 = {args.seed1}, người 2 = {args.seed2}")
+        print(f"Kết quả: {agents[board.winner].name} ({SYMBOLS[board.winner]}) THẮNG")
+    print(f"Seed: {agents[PLAYER_1].name} = {args.seed1}, {agents[PLAYER_2].name} = {args.seed2}")
 
     if ask_yes_no("Lưu seed của ván này để chạy lại sau?"):
         save_seeds(args.seed1, args.seed2, agents, board)
