@@ -1,0 +1,60 @@
+{
+ "exp": "EXP-003",
+ "split": "dev",
+ "games": 100,
+ "agent_a": "ab-d3",
+ "agent_b": "ab-d3-nopr",
+ "seed_start": 0,
+ "second_seed_offset": 10000000,
+ "summary": {
+  "total": {
+   "games": 100,
+   "win": 47,
+   "draw": 0,
+   "loss": 53,
+   "score": 0.47,
+   "wilson_low": 0.3751,
+   "wilson_high": 0.5671
+  },
+  "a_first": {
+   "games": 50,
+   "win": 11,
+   "draw": 0,
+   "loss": 39,
+   "score": 0.22,
+   "wilson_low": 0.1275,
+   "wilson_high": 0.3524
+  },
+  "a_second": {
+   "games": 50,
+   "win": 36,
+   "draw": 0,
+   "loss": 14,
+   "score": 0.72,
+   "wilson_low": 0.5833,
+   "wilson_high": 0.8253
+  },
+  "mean_moves": 23.67
+ },
+ "timing": {
+  "AB-d3": {
+   "moves": 1182,
+   "mean_ms": 4.7905,
+   "p95_ms": 8.7826,
+   "mean_nodes": 155.3,
+   "mean_depth": 3
+  },
+  "AB-d3-nopr": {
+   "moves": 1185,
+   "mean_ms": 10.3283,
+   "p95_ms": 17.6031,
+   "mean_nodes": 292.9,
+   "mean_depth": 3
+  }
+ },
+ "git_commit": "337e67b",
+ "python": "3.10.11",
+ "machine": "Windows-10-10.0.26300-SP0",
+ "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+ "note": "Thời gian dao động theo máy và tải; tác tử theo thời gian (ab-t) không tái lập chính xác, xem cột depth trong file moves. RAM/VRAM chưa được đo. Điểm (score) theo góc nhìn của agent_a."
+}

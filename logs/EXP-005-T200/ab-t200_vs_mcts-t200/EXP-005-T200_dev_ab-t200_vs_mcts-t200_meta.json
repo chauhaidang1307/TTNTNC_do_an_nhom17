@@ -1,0 +1,60 @@
+{
+ "exp": "EXP-005-T200",
+ "split": "dev",
+ "games": 100,
+ "agent_a": "ab-t200",
+ "agent_b": "mcts-t200",
+ "seed_start": 0,
+ "second_seed_offset": 10000000,
+ "summary": {
+  "total": {
+   "games": 100,
+   "win": 80,
+   "draw": 0,
+   "loss": 20,
+   "score": 0.8,
+   "wilson_low": 0.7112,
+   "wilson_high": 0.8666
+  },
+  "a_first": {
+   "games": 50,
+   "win": 34,
+   "draw": 0,
+   "loss": 16,
+   "score": 0.68,
+   "wilson_low": 0.5419,
+   "wilson_high": 0.7924
+  },
+  "a_second": {
+   "games": 50,
+   "win": 46,
+   "draw": 0,
+   "loss": 4,
+   "score": 0.92,
+   "wilson_low": 0.8116,
+   "wilson_high": 0.9685
+  },
+  "mean_moves": 31.54
+ },
+ "timing": {
+  "AB-t200ms": {
+   "moves": 1592,
+   "mean_ms": 170.5805,
+   "p95_ms": 204.0155,
+   "mean_nodes": 12481.1,
+   "mean_depth": 7.43
+  },
+  "MCTS-t200ms": {
+   "moves": 1562,
+   "mean_ms": 200.3259,
+   "p95_ms": 200.1067,
+   "mean_nodes": 6206.5,
+   "mean_depth": 7.06
+  }
+ },
+ "git_commit": "337e67b",
+ "python": "3.10.11",
+ "machine": "Windows-10-10.0.26300-SP0",
+ "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+ "note": "Thời gian dao động theo máy và tải; tác tử theo thời gian (ab-t) không tái lập chính xác, xem cột depth trong file moves. RAM/VRAM chưa được đo. Điểm (score) theo góc nhìn của agent_a."
+}
