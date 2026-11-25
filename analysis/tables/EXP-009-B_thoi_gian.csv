@@ -1,0 +1,6 @@
+﻿agent,moves,mean_ms,p95_ms,mean_nodes,mean_depth
+AB-d4,5675,9.746,23.062,494.27,4.0
+DQN-RL-004-last,5840,0.4,0.657,,
+Heuristic,4836,0.344,0.662,,
+MCTS-s1000,4899,54.272,98.892,1000.0,5.635
+Random,2234,0.003,0.004,,

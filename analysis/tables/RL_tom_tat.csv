@@ -1,0 +1,4 @@
+﻿run,episodes,train_seconds,dev_random_cuoi,dev_heuristic_cuoi
+RL-002,157296,10803.0,0.99,0.925
+RL-003,60000,2222.6,1.0,0.995
+RL-004,200000,6780.5,1.0,0.985

@@ -1,0 +1,9 @@
+﻿exp,doi_thu,rl_score,rl_score_di_truoc,rl_score_di_sau
+EXP-009-A,ab-t50,0.98,0.96,1.0
+EXP-009-A,mcts-t50,0.82,0.9,0.74
+EXP-009-A,heuristic,0.97,1.0,0.94
+EXP-009-A,random,1.0,1.0,1.0
+EXP-009-B,mcts-s1000,0.725,0.82,0.63
+EXP-009-B,ab-d4,1.0,1.0,1.0
+EXP-009-B,heuristic,0.97,1.0,0.94
+EXP-009-B,random,1.0,1.0,1.0

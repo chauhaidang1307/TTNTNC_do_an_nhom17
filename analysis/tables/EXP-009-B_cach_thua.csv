@@ -1,0 +1,6 @@
+﻿,loss,forced_loss,one_move_mistake
+random,399,79,320
+heuristic,256,256,0
+ab-d4,152,152,0
+mcts-s1000,147,126,21
+dqn_RL-004_last,28,19,9

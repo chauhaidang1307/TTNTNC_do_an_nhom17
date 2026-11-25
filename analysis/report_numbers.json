@@ -1,0 +1,874 @@
+{
+ "game_lengths": {
+  "ab-d3 vs ab-d4": {
+   "mean": 31.71,
+   "median": 31.0,
+   "min": 24,
+   "max": 42,
+   "p95": 42
+  },
+  "heuristic vs ab-d3": {
+   "mean": 19.06,
+   "median": 13.5,
+   "min": 7,
+   "max": 42,
+   "p95": 42
+  },
+  "heuristic vs ab-d4": {
+   "mean": 29.82,
+   "median": 36.0,
+   "min": 11,
+   "max": 42,
+   "p95": 39
+  },
+  "random vs ab-d3": {
+   "mean": 11.29,
+   "median": 11.0,
+   "min": 7,
+   "max": 25,
+   "p95": 19
+  },
+  "random vs ab-d4": {
+   "mean": 12.34,
+   "median": 12.0,
+   "min": 7,
+   "max": 30,
+   "p95": 22
+  },
+  "random vs heuristic": {
+   "mean": 11.34,
+   "median": 8.0,
+   "min": 7,
+   "max": 30,
+   "p95": 25
+  }
+ },
+ "first_mover": {
+  "per_pair": {
+   "ab-d3 vs ab-d4": {
+    "p1": 41,
+    "p2": 46,
+    "draw": 13
+   },
+   "heuristic vs ab-d3": {
+    "p1": 70,
+    "p2": 24,
+    "draw": 6
+   },
+   "heuristic vs ab-d4": {
+    "p1": 66,
+    "p2": 32,
+    "draw": 2
+   },
+   "random vs ab-d3": {
+    "p1": 51,
+    "p2": 49,
+    "draw": 0
+   },
+   "random vs ab-d4": {
+    "p1": 50,
+    "p2": 50,
+    "draw": 0
+   },
+   "random vs heuristic": {
+    "p1": 50,
+    "p2": 50,
+    "draw": 0
+   }
+  },
+  "total": {
+   "p1": 328,
+   "p2": 251,
+   "draw": 21
+  },
+  "games": 600,
+  "p1_score": 0.5642,
+  "wilson": [
+   0.5242,
+   0.6033
+  ]
+ },
+ "ply_cost": {
+  "AB-d3": {
+   "1-10": {
+    "moves": 1435,
+    "mean_ms": 6.499,
+    "mean_nodes": 187.7,
+    "mean_depth": 3.0
+   },
+   "11-20": {
+    "moves": 860,
+    "mean_ms": 5.445,
+    "mean_nodes": 152.8,
+    "mean_depth": 3.0
+   },
+   "21-30": {
+    "moves": 561,
+    "mean_ms": 2.266,
+    "mean_nodes": 70.1,
+    "mean_depth": 3.0
+   },
+   "31-42": {
+    "moves": 267,
+    "mean_ms": 0.667,
+    "mean_nodes": 24.0,
+    "mean_depth": 3.0
+   }
+  },
+  "AB-d4": {
+   "1-10": {
+    "moves": 1474,
+    "mean_ms": 28.914,
+    "mean_nodes": 792.5,
+    "mean_depth": 4.0
+   },
+   "11-20": {
+    "moves": 1077,
+    "mean_ms": 20.516,
+    "mean_nodes": 563.5,
+    "mean_depth": 4.0
+   },
+   "21-30": {
+    "moves": 739,
+    "mean_ms": 6.007,
+    "mean_nodes": 188.9,
+    "mean_depth": 4.0
+   },
+   "31-42": {
+    "moves": 465,
+    "mean_ms": 1.128,
+    "mean_nodes": 45.0,
+    "mean_depth": 4.0
+   }
+  }
+ },
+ "openings": {
+  "first_move": {
+   "AB-d3": {
+    "4": 150
+   },
+   "AB-d4": {
+    "4": 150
+   },
+   "Heuristic": {
+    "4": 150
+   },
+   "Random": {
+    "1": 21,
+    "2": 21,
+    "3": 24,
+    "4": 21,
+    "5": 21,
+    "6": 21,
+    "7": 21
+   }
+  },
+  "reply": {
+   "AB-d4": {
+    "3": 10,
+    "4": 128,
+    "5": 12
+   },
+   "AB-d3": {
+    "3": 8,
+    "4": 135,
+    "5": 7
+   },
+   "Heuristic": {
+    "4": 150
+   },
+   "Random": {
+    "1": 24,
+    "2": 33,
+    "3": 18,
+    "4": 30,
+    "5": 21,
+    "6": 12,
+    "7": 12
+   }
+  }
+ },
+ "robustness": {
+  "ab-d3 vs ab-d4": {
+   "score": 0.105,
+   "wilson": [
+    0.0589,
+    0.1804
+   ],
+   "bootstrap": [
+    0.06,
+    0.155
+   ],
+   "unique_games": 52,
+   "unique_score": 0.1635,
+   "unique_wilson": [
+    0.0869,
+    0.2863
+   ]
+  },
+  "heuristic vs ab-d3": {
+   "score": 0.23,
+   "wilson": [
+    0.1584,
+    0.3215
+   ],
+   "bootstrap": [
+    0.155,
+    0.31
+   ],
+   "unique_games": 59,
+   "unique_score": 0.3729,
+   "unique_wilson": [
+    0.2608,
+    0.5005
+   ]
+  },
+  "heuristic vs ab-d4": {
+   "score": 0.17,
+   "wilson": [
+    0.1089,
+    0.2555
+   ],
+   "bootstrap": [
+    0.1,
+    0.245
+   ],
+   "unique_games": 76,
+   "unique_score": 0.1974,
+   "unique_wilson": [
+    0.1234,
+    0.3004
+   ]
+  },
+  "random vs ab-d3": {
+   "score": 0.01,
+   "wilson": [
+    0.0018,
+    0.0545
+   ],
+   "bootstrap": [
+    0.0,
+    0.03
+   ],
+   "unique_games": 100,
+   "unique_score": 0.01,
+   "unique_wilson": [
+    0.0018,
+    0.0545
+   ]
+  },
+  "random vs ab-d4": {
+   "score": 0.0,
+   "wilson": [
+    0.0,
+    0.037
+   ],
+   "bootstrap": [
+    0.0,
+    0.0
+   ],
+   "unique_games": 100,
+   "unique_score": 0.0,
+   "unique_wilson": [
+    0.0,
+    0.037
+   ]
+  },
+  "random vs heuristic": {
+   "score": 0.0,
+   "wilson": [
+    0.0,
+    0.037
+   ],
+   "bootstrap": [
+    0.0,
+    0.0
+   ],
+   "unique_games": 99,
+   "unique_score": 0.0,
+   "unique_wilson": [
+    0.0,
+    0.0374
+   ]
+  }
+ },
+ "robustness_note": "bootstrap 10.000 lần, rng seed 0; ván trùng = cùng lượt đi và cùng chuỗi nước",
+ "typical_games": [
+  {
+   "pair": "ab-d3 vs ab-d4",
+   "game": 0,
+   "rule": "hai ván đầu của cặp",
+   "first": "ab-d3",
+   "result": "ab-d4",
+   "plies": 24,
+   "seed_a": 0,
+   "seed_b": 10000000,
+   "moves": [
+    4,
+    4,
+    3,
+    5,
+    4,
+    4,
+    2,
+    1,
+    2,
+    2,
+    3,
+    2,
+    3,
+    3,
+    4,
+    2,
+    2,
+    4,
+    5,
+    3,
+    3,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "pair": "ab-d3 vs ab-d4",
+   "game": 1,
+   "rule": "hai ván đầu của cặp",
+   "first": "ab-d4",
+   "result": "ab-d4",
+   "plies": 31,
+   "seed_a": 1,
+   "seed_b": 10000001,
+   "moves": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    5,
+    5,
+    5,
+    5,
+    5,
+    3,
+    1,
+    3,
+    2,
+    3,
+    3,
+    3,
+    3,
+    4,
+    7,
+    7,
+    5,
+    2,
+    6,
+    6,
+    6,
+    2,
+    2,
+    1,
+    2,
+    1
+   ]
+  },
+  {
+   "pair": "heuristic vs ab-d3",
+   "game": 0,
+   "rule": "hai ván đầu của cặp",
+   "first": "heuristic",
+   "result": "ab-d3",
+   "plies": 20,
+   "seed_a": 0,
+   "seed_b": 10000000,
+   "moves": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    3,
+    4,
+    5,
+    5,
+    5,
+    5,
+    3,
+    5,
+    6,
+    5,
+    6,
+    7,
+    3,
+    3,
+    3
+   ]
+  },
+  {
+   "pair": "heuristic vs ab-d3",
+   "game": 1,
+   "rule": "hai ván đầu của cặp",
+   "first": "ab-d3",
+   "result": "ab-d3",
+   "plies": 9,
+   "seed_a": 1,
+   "seed_b": 10000001,
+   "moves": [
+    4,
+    4,
+    4,
+    4,
+    6,
+    4,
+    5,
+    3,
+    7
+   ]
+  },
+  {
+   "pair": "heuristic vs ab-d4",
+   "game": 0,
+   "rule": "hai ván đầu của cặp",
+   "first": "heuristic",
+   "result": "heuristic",
+   "plies": 39,
+   "seed_a": 0,
+   "seed_b": 10000000,
+   "moves": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    3,
+    4,
+    5,
+    5,
+    5,
+    5,
+    3,
+    5,
+    7,
+    5,
+    7,
+    3,
+    3,
+    3,
+    3,
+    2,
+    7,
+    7,
+    7,
+    2,
+    2,
+    2,
+    2,
+    2,
+    7,
+    1,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    1,
+    1
+   ]
+  },
+  {
+   "pair": "heuristic vs ab-d4",
+   "game": 1,
+   "rule": "hai ván đầu của cặp",
+   "first": "ab-d4",
+   "result": "ab-d4",
+   "plies": 39,
+   "seed_a": 1,
+   "seed_b": 10000001,
+   "moves": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    5,
+    3,
+    3,
+    5,
+    5,
+    5,
+    5,
+    5,
+    3,
+    3,
+    7,
+    6,
+    3,
+    7,
+    6,
+    6,
+    6,
+    6,
+    3,
+    2,
+    6,
+    7,
+    7,
+    1,
+    1,
+    7,
+    7,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2
+   ]
+  },
+  {
+   "pair": "ab-d3 vs ab-d4",
+   "game": 2,
+   "rule": "ván hòa đầu tiên",
+   "first": "ab-d3",
+   "result": "draw",
+   "plies": 42,
+   "seed_a": 2,
+   "seed_b": 10000002,
+   "moves": [
+    4,
+    4,
+    4,
+    4,
+    3,
+    2,
+    6,
+    5,
+    5,
+    5,
+    6,
+    6,
+    5,
+    3,
+    2,
+    6,
+    6,
+    2,
+    2,
+    4,
+    2,
+    4,
+    2,
+    6,
+    7,
+    5,
+    3,
+    3,
+    5,
+    3,
+    3,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    7,
+    7,
+    7,
+    7,
+    7
+   ]
+  }
+ ],
+ "window_cover": [
+  [
+   3,
+   4,
+   5,
+   7,
+   5,
+   4,
+   3
+  ],
+  [
+   4,
+   6,
+   8,
+   10,
+   8,
+   6,
+   4
+  ],
+  [
+   5,
+   8,
+   11,
+   13,
+   11,
+   8,
+   5
+  ],
+  [
+   5,
+   8,
+   11,
+   13,
+   11,
+   8,
+   5
+  ],
+  [
+   4,
+   6,
+   8,
+   10,
+   8,
+   6,
+   4
+  ],
+  [
+   3,
+   4,
+   5,
+   7,
+   5,
+   4,
+   3
+  ]
+ ],
+ "windows_total": 69,
+ "loss_types": {
+  "AB-d3": {
+   "tổng": 104,
+   "cưỡng bức": 104,
+   "chặn rồi bị thắng ngay phía trên": 21,
+   "chặn cũng thua": 63,
+   "hết nước an toàn": 18,
+   "chiếu đôi": 2
+  },
+  "AB-d4": {
+   "tổng": 20,
+   "cưỡng bức": 20,
+   "hết nước an toàn": 19,
+   "chặn cũng thua": 1
+  },
+  "Heuristic": {
+   "tổng": 156,
+   "cưỡng bức": 156,
+   "chặn rồi bị thắng ngay phía trên": 26,
+   "chiếu đôi": 80,
+   "hết nước an toàn": 50
+  },
+  "Random": {
+   "tổng": 299,
+   "cưỡng bức": 85,
+   "chiếu đôi": 72,
+   "sai lầm": 214,
+   "còn nước an toàn nhưng không chọn": 214,
+   "chặn cũng thua": 10,
+   "chặn rồi bị thắng ngay phía trên": 3
+  }
+ },
+ "loss_note": "phát lại mọi ván có người thắng; chỉ xét nước ngay trước nước thắng cuối cùng của người thắng; sai lầm sớm hơn bị bỏ sót",
+ "rl": {
+  "RL-001": {
+   "evals": 27,
+   "last_episode": 67500,
+   "elapsed_s": 1832.6,
+   "episodes_per_s": 36.83,
+   "finished": false,
+   "dev_heuristic_max": 1.0,
+   "dev_heuristic_last": 1.0,
+   "dev_random_last": 1.0,
+   "evals_with_heuristic_1": 10,
+   "by_stage": {
+    "vs_random": {
+     "evals": 8,
+     "heuristic_mean": 0.378,
+     "heuristic_min": 0.0,
+     "heuristic_max": 0.84
+    },
+    "vs_heuristic": {
+     "evals": 16,
+     "heuristic_mean": 0.95,
+     "heuristic_min": 0.665,
+     "heuristic_max": 1.0
+    },
+    "self_pool": {
+     "evals": 3,
+     "heuristic_mean": 0.925,
+     "heuristic_min": 0.855,
+     "heuristic_max": 1.0
+    }
+   }
+  },
+  "RL-002": {
+   "evals": 58,
+   "last_episode": 145000,
+   "elapsed_s": 9815.4,
+   "episodes_per_s": 14.77,
+   "finished": false,
+   "dev_heuristic_max": 1.0,
+   "dev_heuristic_last": 0.92,
+   "dev_random_last": 1.0,
+   "evals_with_heuristic_1": 7,
+   "by_stage": {
+    "vs_random": {
+     "evals": 8,
+     "heuristic_mean": 0.191,
+     "heuristic_min": 0.0,
+     "heuristic_max": 0.5
+    },
+    "vs_heuristic": {
+     "evals": 16,
+     "heuristic_mean": 0.825,
+     "heuristic_min": 0.51,
+     "heuristic_max": 1.0
+    },
+    "self_pool": {
+     "evals": 34,
+     "heuristic_mean": 0.91,
+     "heuristic_min": 0.725,
+     "heuristic_max": 1.0
+    }
+   }
+  }
+ },
+ "pilot": {
+  "games": 200,
+  "mean": 10.84,
+  "median": 8.0,
+  "min": 7,
+  "max": 30,
+  "mean_first": 9.72,
+  "mean_second": 11.96,
+  "distinct_lengths": 18
+ },
+ "quick_pruning": {
+  "bàn trống": [
+   {
+    "depth": 2,
+    "nodes_on": 56,
+    "nodes_off": 56,
+    "ms_on": 2.7,
+    "ms_off": 2.7,
+    "same_scores": true,
+    "same_action": true,
+    "ratio": 1.0
+   },
+   {
+    "depth": 3,
+    "nodes_on": 147,
+    "nodes_off": 399,
+    "ms_on": 5.7,
+    "ms_off": 18.9,
+    "same_scores": true,
+    "same_action": true,
+    "ratio": 2.71
+   },
+   {
+    "depth": 4,
+    "nodes_on": 580,
+    "nodes_off": 2800,
+    "ms_on": 23.7,
+    "ms_off": 119.7,
+    "same_scores": true,
+    "same_action": true,
+    "ratio": 4.83
+   },
+   {
+    "depth": 5,
+    "nodes_on": 1536,
+    "nodes_off": 19607,
+    "ms_on": 55.3,
+    "ms_off": 867.5,
+    "same_scores": true,
+    "same_action": true,
+    "ratio": 12.76
+   },
+   {
+    "depth": 6,
+    "nodes_on": 5995,
+    "nodes_off": 137256,
+    "ms_on": 230.8,
+    "ms_off": 6085.2,
+    "same_scores": true,
+    "same_action": true,
+    "ratio": 22.9
+   }
+  ],
+  "thế giữa ván (10 nước)": [
+   {
+    "depth": 2,
+    "nodes_on": 56,
+    "nodes_off": 56,
+    "ms_on": 2.7,
+    "ms_off": 2.3,
+    "same_scores": true,
+    "same_action": true,
+    "ratio": 1.0
+   },
+   {
+    "depth": 3,
+    "nodes_on": 153,
+    "nodes_off": 399,
+    "ms_on": 4.7,
+    "ms_off": 17.8,
+    "same_scores": true,
+    "same_action": true,
+    "ratio": 2.61
+   },
+   {
+    "depth": 4,
+    "nodes_on": 536,
+    "nodes_off": 2714,
+    "ms_on": 21.7,
+    "ms_off": 117.0,
+    "same_scores": true,
+    "same_action": true,
+    "ratio": 5.06
+   },
+   {
+    "depth": 5,
+    "nodes_on": 1427,
+    "nodes_off": 18507,
+    "ms_on": 52.3,
+    "ms_off": 798.4,
+    "same_scores": true,
+    "same_action": true,
+    "ratio": 12.97
+   },
+   {
+    "depth": 6,
+    "nodes_on": 5499,
+    "nodes_off": 123011,
+    "ms_on": 197.5,
+    "ms_off": 5176.4,
+    "same_scores": true,
+    "same_action": true,
+    "ratio": 22.37
+   }
+  ]
+ },
+ "quick_mcts_speed": {
+  "200": {
+   "median_sims_per_s": 9741,
+   "min": 8974,
+   "max": 11171
+  },
+  "1000": {
+   "median_sims_per_s": 8738,
+   "min": 8348,
+   "max": 9001
+  },
+  "5000": {
+   "median_sims_per_s": 7340,
+   "min": 6545,
+   "max": 7750
+  }
+ },
+ "qnet_params": 420167
+}
