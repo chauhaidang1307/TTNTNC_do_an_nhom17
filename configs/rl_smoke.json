@@ -1,0 +1,24 @@
+{
+ "seed": 0,
+ "device": "auto",
+ "network": {"channels": 16, "hidden": 32},
+ "gamma": 0.99,
+ "batch_size": 32,
+ "replay_capacity": 5000,
+ "min_replay": 100,
+ "updates_per_episode": 2,
+ "lr_start": 0.001,
+ "lr_end": 0.0001,
+ "grad_clip": 10.0,
+ "eps_start": 1.0,
+ "eps_end": 0.05,
+ "eps_decay_episodes": 150,
+ "target_update_steps": 50,
+ "stages": [
+  {"name": "vs_random", "episodes": 100, "opponent": "random"},
+  {"name": "vs_heuristic", "episodes": 100, "opponent": "heuristic", "opp_eps": 0.1},
+  {"name": "self_pool", "episodes": 100, "opponent": "self_pool", "pool_prob": 0.5, "pool_every": 50, "pool_size": 2, "opp_eps": 0.05}
+ ],
+ "eval": {"every": 100, "games": 10, "dev_seed_start": 0},
+ "snapshot_every": 0
+}

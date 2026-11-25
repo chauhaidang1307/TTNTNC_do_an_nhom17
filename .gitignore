@@ -10,3 +10,6 @@ __pycache__/
 # Tạm thời chưa đưa lên git (xóa 2 dòng này khi muốn up)
 CLAUDE.md
 NHAT_KY.md
+
+# Trong so mo hinh (luu tren Google Drive, khong dua len GitHub)
+/checkpoints/

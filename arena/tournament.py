@@ -9,7 +9,9 @@ import sys
 from pathlib import Path
 
 from agents.alphabeta import AlphaBetaAgent
+from agents.dqn_agent import DQNAgent
 from agents.heuristic import HeuristicAgent
+from agents.mcts import MCTSAgent
 from agents.random_agent import RandomAgent
 from arena.match import play_game
 from arena.metrics import percentile, score, wilson
@@ -35,6 +37,14 @@ def make_agent(spec, seed):
         return AlphaBetaAgent(depth=int(base[4:]), seed=seed, pruning=pruning)
     if base.startswith("ab-t"):
         return AlphaBetaAgent(depth=42, seed=seed, pruning=pruning, time_limit=int(base[4:]) / 1000)
+    if spec.startswith("dqn_"):  # DQN đã huấn luyện, dạng dqn_<run>_<checkpoint>, ví dụ dqn_RL-001_best
+        return DQNAgent.from_spec(spec, seed=seed)
+    if spec.startswith("mcts") and not pruning:
+        raise ValueError(f"MCTS không có tùy chọn -nopr: {spec}")
+    if spec.startswith("mcts-s"):  # MCTS theo số mô phỏng, ví dụ mcts-s1000
+        return MCTSAgent(simulations=int(spec[6:]), seed=seed)
+    if spec.startswith("mcts-t"):  # MCTS theo thời gian (mili giây mỗi nước), ví dụ mcts-t100
+        return MCTSAgent(simulations=1, seed=seed, time_limit=int(spec[6:]) / 1000)
     raise ValueError(f"Tên tác tử không hợp lệ: {spec}")
 
 
