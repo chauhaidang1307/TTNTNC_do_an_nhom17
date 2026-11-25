@@ -463,5 +463,5 @@ def test_board_js_registers_each_board_and_keys_go_to_the_visible_one():
 
 def test_app_has_three_tabs_in_order():
     demo = gui.build_app()
-    labels = [b.label for b in demo.blocks.values() if type(b).__name__ == "Tab"]
-    assert labels == ["Người – Máy", "Người – Người", "Máy – Máy"]
+    labels = [b.label.replace("–", "-") for b in demo.blocks.values() if type(b).__name__ == "Tab"]  # gạch dài hay gạch nối đều được
+    assert labels == ["Người - Máy", "Người - Người", "Máy - Máy"]
