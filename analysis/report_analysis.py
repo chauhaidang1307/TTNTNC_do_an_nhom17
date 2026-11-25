@@ -1,13 +1,3 @@
-"""Phân tích sâu các log đã có để đưa vào báo cáo cuối kỳ. Mọi con số và hình đều sinh từ log, không nhập tay.
-
-Chạy từ thư mục gốc:  python analysis/report_analysis.py
-Đầu vào : logs/EXP-001/*/ (games.csv, moves.csv, meta.json), logs/heuristic_vs_random.csv,
-          logs/RL-001/train_log.csv, logs/RL-002/train_log.csv
-Đầu ra  : analysis/report_numbers.json và các hình trong analysis/figures/report/
-
-Hai phép kiểm tra nhanh ở cuối (số nút Alpha-Beta bật/tắt cắt tỉa trên hai thế cờ cố định; tốc độ MCTS) CHỈ là kiểm tra
-tham khảo chạy bằng chính script này, KHÔNG phải thí nghiệm chính thức có mã EXP; thời gian đo trong lúc máy còn chạy việc khác.
-"""
 import collections
 import csv
 import json

@@ -1,9 +1,3 @@
-"""Sinh các hình của báo cáo cuối kỳ TỪ LOG THÔ (không nhập số bằng tay).
-
-Chạy từ thư mục gốc:  python analysis/report_figures.py
-Đầu vào : logs/EXP-001/<A>_vs_<B>/*_meta.json và *_moves.csv
-Đầu ra  : analysis/figures/report/*.png (nền sáng, dùng cho báo cáo Word)
-"""
 import collections
 import csv
 import json

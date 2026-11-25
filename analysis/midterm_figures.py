@@ -1,10 +1,3 @@
-"""Sinh các hình cho báo cáo/slide giữa kỳ từ log thật và từ code của dự án.
-
-Chạy từ thư mục gốc:  python -m analysis.midterm_figures
-Đầu vào : logs/heuristic_vs_random.csv, logs/saved_seeds.csv
-Đầu ra  : analysis/figures/dark/*.png (nền tối, cho slide) và analysis/figures/light/*.png (nền sáng, cho báo cáo)
-Không có số liệu nào nhập tay: số liệu lấy từ log, bàn cờ lấy từ việc chạy lại ván theo seed (có kiểm tra khớp log).
-"""
 from pathlib import Path
 
 import matplotlib

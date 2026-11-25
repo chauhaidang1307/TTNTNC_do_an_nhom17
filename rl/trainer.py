@@ -1,18 +1,3 @@
-"""Huấn luyện Double DQN cho Connect Four (cấp 6).
-
-Chạy từ thư mục gốc:
-  python -m rl.trainer --config configs/rl_v1.json --run RL-001 [--max-minutes 480]
-
-Ý tưởng chính (đã nêu trong kế hoạch):
-  - Q(s, a) theo góc nhìn người đến lượt. Phần thưởng chỉ ở cuối ván: +1 nếu nước vừa đi thắng, 0 nếu hòa.
-  - Mục tiêu kiểu negamax: s' là góc nhìn của ĐỐI THỦ nên giá trị của s' được ĐỔI DẤU:
-        y = r                                   nếu ván kết thúc
-        y = r - gamma * Q_target(s', a*)        nếu chưa kết thúc, a* = argmax Q_online(s', .) trên các nước hợp lệ
-  - Huber loss, mạng đích (target), experience replay, epsilon-greedy, lật gương lúc lấy mẫu.
-  - 3 giai đoạn đối thủ: Random -> Heuristic (có epsilon nhỏ) -> self-play với kho checkpoint cũ.
-  - Ván dev (dải seed riêng) dùng để theo dõi và chọn checkpoint. Dải test KHÔNG bao giờ dùng ở đây.
-Log: logs/<run>/train_log.csv, config.json, meta.json. Trọng số: checkpoints/<run>/ (không đưa lên GitHub).
-"""
 import argparse
 import copy
 import csv
