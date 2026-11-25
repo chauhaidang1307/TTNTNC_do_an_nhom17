@@ -206,12 +206,22 @@ def run_training(cfg, run_name, config_path=None, max_minutes=None, logs_root=LO
     np.random.seed(seed)
     rng = random.Random(seed)
     net = QNet(**cfg["network"]).to(device)
+    pool = []
+    if cfg.get("init_from"):
+        # Khởi động ấm (warm start): chỉ nạp TRỌNG SỐ từ checkpoint cũ. Bộ nhớ kinh nghiệm, trạng thái Adam, mạng đích
+        # và kho đối thủ không có trong checkpoint nên bắt đầu lại; bản gốc của mạng được đưa vào kho đối thủ.
+        data = torch.load(ROOT / cfg["init_from"], map_location=device)
+        if dict(data["network"]) != dict(cfg["network"]):
+            raise ValueError(f"Kiến trúc trong {cfg['init_from']} khác cấu hình: {data['network']} vs {cfg['network']}")
+        net.load_state_dict(data["state_dict"])
+        base = copy.deepcopy(net)
+        base.eval()
+        pool.append(base)
     target = copy.deepcopy(net)
     target.eval()
     optimizer = torch.optim.Adam(net.parameters(), lr=cfg["lr_start"])
     replay = ReplayBuffer(cfg["replay_capacity"], seed=seed + 1)
     heuristic = HeuristicAgent(seed=seed + 2)
-    pool = []
     total = total_episodes(cfg)
     ev = cfg["eval"]
 

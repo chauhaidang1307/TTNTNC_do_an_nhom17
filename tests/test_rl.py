@@ -310,6 +310,34 @@ def test_run_training_stops_on_time_limit_and_still_saves(tmp_path):
     assert (tmp_path / "ck" / "RL-T" / "last.pt").exists()
 
 
+def test_run_training_init_from_loads_weights_and_checks_architecture(tmp_path):
+    cfg = tiny_cfg()
+    net = QNet(**cfg["network"])
+    with torch.no_grad():
+        for p in net.parameters():
+            p.fill_(0.123)
+    src = tmp_path / "src.pt"
+    save_checkpoint(src, net, cfg["network"], 5)
+    cfg["init_from"] = str(src)
+    seen = {}
+    orig = trainer.net_policy
+
+    def spy(n, device, eps, rng):
+        seen.setdefault("first", [p.detach().cpu().clone() for p in n.parameters()])
+        return orig(n, device, eps, rng)
+    trainer.net_policy = spy
+    try:
+        trainer.run_training(cfg, "RL-W", logs_root=tmp_path / "logs", ckpt_root=tmp_path / "ck", verbose=False)
+    finally:
+        trainer.net_policy = orig
+    assert all(torch.allclose(p, torch.full_like(p, 0.123)) for p in seen["first"])  # bắt đầu từ trọng số đã nạp
+    bad = tiny_cfg()
+    bad["network"] = {"channels": 4, "hidden": 8}
+    bad["init_from"] = str(src)
+    with pytest.raises(ValueError):
+        trainer.run_training(bad, "RL-W2", logs_root=tmp_path / "logs", ckpt_root=tmp_path / "ck", verbose=False)
+
+
 # ---------- tích hợp arena ----------
 
 def test_arena_builds_dqn_from_spec(tmp_path, monkeypatch):
