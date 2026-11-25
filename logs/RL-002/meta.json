@@ -1,0 +1,39 @@
+{
+ "run": "RL-002",
+ "config_file": "configs/rl_v1.json",
+ "seed": 0,
+ "device": "cuda",
+ "gpu": "NVIDIA GeForce RTX 3050 Laptop GPU",
+ "episodes_done": 157296,
+ "episodes_planned": 200000,
+ "updates": 628252,
+ "replay_size": 200000,
+ "elapsed_seconds": 10803.0,
+ "stopped_by": "max_minutes",
+ "best_checkpoint": {
+  "file": "best.pt",
+  "episode": 37500,
+  "criterion": "mean dev score vs Random and Heuristic",
+  "value": 1.0
+ },
+ "last_dev_eval": {
+  "random": {
+   "win": 99,
+   "draw": 0,
+   "loss": 1,
+   "score": 0.99
+  },
+  "heuristic": {
+   "win": 86,
+   "draw": 13,
+   "loss": 1,
+   "score": 0.925
+  }
+ },
+ "torch": "2.14.1+cu132",
+ "python": "3.10.11",
+ "machine": "Windows-10-10.0.26300-SP0",
+ "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+ "git_commit": "337e67b",
+ "note": "Ván dev dùng dải seed dev_seed_start trở đi; dải test không dùng. Huấn luyện trên GPU không tái lập chính xác từng bit. Chưa có chức năng resume."
+}
