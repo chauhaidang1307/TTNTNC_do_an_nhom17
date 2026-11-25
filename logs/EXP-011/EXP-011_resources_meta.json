@@ -1,0 +1,11 @@
+{
+ "exp": "EXP-011",
+ "games_per_agent": 10,
+ "opponent": "heuristic",
+ "seeds": "dev (0..), không tính điểm",
+ "python": "3.10.11",
+ "machine": "Windows-10-10.0.26300-SP0",
+ "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+ "total_ram_gb": 15.7,
+ "note": "RAM đo bằng psutil (rss, peak_wset) trong tiến trình con riêng cho từng tác tử; rss_import giống nhau cho mọi tác tử vì đã nạp torch. VRAM là max_memory_allocated (chưa gồm ngữ cảnh CUDA). Arena chính thức chạy DQN trên CPU."
+}

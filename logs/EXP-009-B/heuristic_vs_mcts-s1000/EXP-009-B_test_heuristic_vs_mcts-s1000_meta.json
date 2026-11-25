@@ -1,0 +1,60 @@
+{
+ "exp": "EXP-009-B",
+ "split": "test",
+ "games": 100,
+ "agent_a": "heuristic",
+ "agent_b": "mcts-s1000",
+ "seed_start": 1000000,
+ "second_seed_offset": 10000000,
+ "summary": {
+  "total": {
+   "games": 100,
+   "win": 13,
+   "draw": 4,
+   "loss": 83,
+   "score": 0.15,
+   "wilson_low": 0.0931,
+   "wilson_high": 0.2328
+  },
+  "a_first": {
+   "games": 50,
+   "win": 8,
+   "draw": 3,
+   "loss": 39,
+   "score": 0.19,
+   "wilson_low": 0.105,
+   "wilson_high": 0.3192
+  },
+  "a_second": {
+   "games": 50,
+   "win": 5,
+   "draw": 1,
+   "loss": 44,
+   "score": 0.11,
+   "wilson_low": 0.0497,
+   "wilson_high": 0.2259
+  },
+  "mean_moves": 22.68
+ },
+ "timing": {
+  "Heuristic": {
+   "moves": 1116,
+   "mean_ms": 0.316,
+   "p95_ms": 0.5479,
+   "mean_nodes": null,
+   "mean_depth": null
+  },
+  "MCTS-s1000": {
+   "moves": 1152,
+   "mean_ms": 46.4276,
+   "p95_ms": 85.0579,
+   "mean_nodes": 1000,
+   "mean_depth": 5.8
+  }
+ },
+ "git_commit": "0a2f205",
+ "python": "3.10.11",
+ "machine": "Windows-10-10.0.26300-SP0",
+ "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+ "note": "Thời gian dao động theo máy và tải; tác tử theo thời gian (ab-t) không tái lập chính xác, xem cột depth trong file moves. RAM/VRAM chưa được đo. Điểm (score) theo góc nhìn của agent_a."
+}
