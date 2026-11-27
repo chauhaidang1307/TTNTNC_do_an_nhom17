@@ -15,7 +15,7 @@
 | GitHub | https://github.com/chauhaidang1307/TTNTNC_do_an_nhom17 |
 | Nhật ký thí nghiệm (Google Sheets) | https://docs.google.com/spreadsheets/d/1j2_EtgJGXSYe5Ha-JSW_ZC-6VURWKV4j1uu33GuLmyk/edit?usp=sharing |
 | Kết quả lớn, checkpoint (Google Drive) | https://drive.google.com/drive/folders/1idI__VM_WHfRRVCFvXHccJCs3LhONktB?usp=sharing |
-| Video demo | (bổ sung đường dẫn sau khi quay xong) |
+| Video demo | https://drive.google.com/file/d/18mN4gCfSti8S1KNVr1lvWeznotVZ3UJq/view?usp=sharing |
 
 ### Danh sách thành viên và đóng góp
 
